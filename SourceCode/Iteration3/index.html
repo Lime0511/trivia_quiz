@@ -1,1 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz (Iteration 3)</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      text-align: center;
+      margin: 20px;
+      background: linear-gradient(135deg, #FC819E, #fad0c4);
+      background-size: 400% 400%;
+      animation: gradientAnimation 10s infinite ease-in-out;
+      min-height: 100vh;
+    }
+
+    /* Gradient Moving BG */
+    @keyframes gradientAnimation {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    /* TEXT */
+    body h1 {
+      font-size: 40px;
+      width: 80%;
+      margin-left: 10%;
+      text-align: center;
+    }
+
+    body p {
+      font-size: 20px;
+      width: 70%;
+      margin-left: 14%;
+    }
+
+    .welcome {
+      margin-bottom: 20px;
+    }
+
+    /* QUIZ BOX*/
+    .quiz-container {
+      max-width: 500px;
+      margin: auto;
+      padding: 20px;
+      border: 5px solid black;
+      border-radius: 10px;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+      background: #D1E9F6;
+    }
+
+    #nameCard {
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* NAME INPUT BOX */
+    input {
+      width: 60%;
+      max-width: 300px;
+      padding: 9px;
+      font-size: 17px;
+      border-radius: 5px;
+      border: 1px solid black;
+      font-family: 'Gill Sans MT', Courier, monospace;
+      text-align: center;
+      text-transform: capitalize;
+    }
+
+    .input-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+
+    @media (max-width: 600px) {
+      input {
+        width: 90%;
+      }
+    }
+
+    /* QUESTION */
+    .question {
+      font-weight: bold;
+      font-size: 30px;
+      width: 90%;
+      text-align: center;
+      margin-left: 6%;
+    }
+
+    /* Next/Previous Button */
+    .buttons {
+      margin-top: 20px;
+    }
+
+    .quiz-container button {
+      font-size: 20px;
+      padding: 5px 5px;
+      background: #FEEE91;
+      font-weight: bold;
+      border: 3px black;
+      border-style: double;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quiz-container button:hover {
+      background: pink;
+      color: blue;
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(0, 123, 255, 0.8);
+    }
+
+    .quiz-container button:active {
+      background: pink;
+      color: green;
+      transform: scale(0.98);
+    }
+
+    /* Progress Bar */
+    .progress-container {
+      width: 100%;
+      height: 12px;
+      background: rgb(247, 231, 125);
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 20px 0;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .progress-bar {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #36d1dc, #5b86e5);
+      border-radius: 10px;
+      transition: width 0.5s ease-in-out;
+    }
+
+    /* QUIZ OPTIONS */
+    .options {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      font-size: 18px;
+      max-width: 600px;
+      margin: 20px;
+    }
+
+    .options button {
+      display: block;
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: #7BD3EA;
+      border: none;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .options button:hover {
+      background-color: #5b86e5;
+      color: white;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .feedback {
+      font-weight: bold;
+      margin-top: 20px;
+      font-size: 18px;
+    }
+
+    /* AUDIO */
+    #musicBtn {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      position: fixed;
+      top: 35px;
+      left: 20px;
+      transform: translateY(-50%);
+    }
+
+    #musicBtn:hover {
+      color: #FEEE91;
+    }
+
+    #muteBtn {
+      background: none;
+      border: none;
+      font-size: 27px;
+      position: fixed;
+      top: 70px;
+      left: 12px;
+      transform: translateY(-50%);
+    }
+
+    /* FINAL SCORE CONTAINER - ENHANCED DESIGN */
+    #finalScoreContainer {
+      text-align: center;
+      animation: bounceIn 0.8s ease-out;
+    }
+
+    @keyframes bounceIn {
+      0% {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+
+      50% {
+        transform: scale(1.05);
+      }
+
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .result-header {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #ff6b6b;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .score-display {
+      font-size: 1.8rem;
+      margin: 20px 0;
+      padding: 15px;
+      background: linear-gradient(135deg, #FEEE91, #fad0c4);
+      border-radius: 10px;
+      border: 3px solid black;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    #leaderboardCard {
+      margin-top: 20px;
+      padding: 15px;
+      border: 2px solid #ccc;
+      border-radius: 12px;
+      background-color: #f9f9f9;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #leaderboardTable {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    #leaderboardTable th,
+    #leaderboardTable td {
+      border: 1px solid #ccc;
+      padding: 8px 12px;
+      text-align: center;
+    }
+
+    #leaderboardTable th {
+      background-color: #e2e2e2;
+      font-weight: bold;
+    }
+
+    #leaderboardTable tbody tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    .restart-section {
+      margin-top: 30px;
+      padding: 20px;
+      background: #7BD3EA;
+      border-radius: 15px;
+      border: 3px dashed #5b86e5;
+    }
+
+    .restart-title {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    #restartBtn {
+      font-size: 1.2rem;
+      padding: 12px 30px;
+      background: linear-gradient(to right, #36d1dc, #5b86e5);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      position: relative;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    #restartBtn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+      background: linear-gradient(to right, #5b86e5, #36d1dc);
+    }
+
+    #restartBtn:active {
+      transform: translateY(1px);
+    }
+
+    #restartBtn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent);
+      transition: 0.5s;
+    }
+
+    #restartBtn:hover::before {
+      left: 100%;
+    }
+
+    /*  BUTTON STYLES */
+
+    .share-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+      position: static;
+    }
+
+    .share-buttons button {
+      padding: 08px 10px;
+      margin: 03px;
+      font-size: 24px;
+      border: 3px dashed white;
+      border-radius: 10px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      box-shadow: 0 0 10px rgba(255, 192, 203, 0.7);
+    }
+
+    .facebook {
+      background: #1877f2 !important;
+    }
+
+    .twitter {
+      background: black !important;
+    }
+
+    .instagram {
+      background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888) !important;
+    }
+
+    .whatsapp {
+      background: #25d366 !important;
+    }
+
+    .email {
+      background: #ff5722 !important;
+    }
+
+    .copy-link {
+      background: gray !important;
+    }
+
+    .share-buttons button:hover {
+      filter: brightness(1.2);
+      box-shadow: 0 0 15px rgba(238, 174, 202, 0.8);
+    }
+
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #f00;
+      opacity: 0;
+      z-index: 10;
+    }
+
+    .leaderboard-card {
+      margin-top: 30px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .leaderboard-card h3 {
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .leaderboard-card ol {
+      padding-left: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- WELCOME DISPLAY -->
+  <div class="quiz-container" id="nameCard">
+    <div class="welcome">
+      <h1>🎉 Welcome to the Quiz! 🎉</h1>
+      <p>Please enter your name to begin:</p>
+      <div class="input-container">
+        <input type="text" id="userNameInput" placeholder="Type your name..." required />
+        <button id="startBtn">Start Quiz</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ CONTAINER -->
+  <div class="quiz-container hidden" id="quizContainer">
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <p class="question" id="question"></p>
+    <div class="options" id="answerButtons"></div>
+    <p class="feedback" id="feedback"></p>
+    <p class="feedback" id="correctAnswerText"></p>
+    <div class="buttons">
+      <button id="nextBtn" class="hidden">Next</button>
+    </div>
+  </div>
+
+
+  <!-- FINAL SCORE CONTAINER - ENHANCED -->
+  <div class="quiz-container hidden" id="finalScoreContainer">
+    <h2 class="result-header">🎉 Quiz Completed! 🎉</h2>
+
+    <div class="score-display">
+      <p>Well done, <strong><span id="finalUserName"></span></strong>!</p>
+      <p>You scored <strong><span id="finalScore"></span></strong> out of <strong><span
+            id="totalQuestions"></span></strong></p>
+      <p>Your percentage: <strong><span id="percentageScore"></span></strong></p>
+
+    </div>
+
+    <!-- Leaderboard Card Container -->
+    <div id="leaderboardCard" style="display: none;">
+      <h2>🏆 Leaderboard</h2>
+      <table id="leaderboardTable">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Name</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- JS will inject rows here -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Social Media Share Buttons -->
+    <div class="share-buttons mt-4">
+      <h3 class="text-center mb-2">Share Your Score</h3>
+      <div class="flex justify-center gap-3">
+        <button class="facebook" onclick="share('facebook')">
+          <i class="fab fa-facebook-f"></i>
+        </button>
+        <button class="twitter" onclick="share('twitter')">
+          <i class="fab fa-x-twitter"></i>
+        </button>
+        <button class="instagram" onclick="share('instagram')">
+          <i class="fab fa-instagram"></i>
+        </button>
+        <button class="whatsapp" onclick="share('whatsapp')">
+          <i class="fab fa-whatsapp"></i>
+        </button>
+        <button class="email" onclick="share('email')">
+          <i class="fas fa-envelope"></i>
+        </button>
+        <button class="copy-link" onclick="copyLink()">
+          <i class="fas fa-link"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="restart-section">
+      <h3 class="restart-title">Want to try again?</h3>
+      <p>Challenge yourself to beat your score!</p>
+      <button id="restartBtn">
+        <i class="fas fa-sync-alt"></i> Take Quiz Again
+      </button>
+    </div>
+  </div>
+
+
+
+  <!-- BG MUSIC -->
+  <button id="musicBtn"><i class="fa-solid fa-play"></i></button>
+  <audio id="bgMusic" loop>
+    <source src="qmusic1.mp3" type="audio/mp3">
+  </audio>
+
+  <!-- SOUND EFFECTS -->
+  <audio class="sfx" id="buttonSound" src="https://www.soundjay.com/buttons/sounds/button-09.mp3"></audio>
+  <audio class="sfx" id="nextSound" src="https://www.soundjay.com/buttons/sounds/button-09.mp3"></audio>
+  <audio class="sfx" id="correctSound" src="https://www.soundjay.com/buttons/sounds/button-09.mp3"></audio>
+  <audio class="sfx" id="wrongSound" src="https://www.soundjay.com/buttons/sounds/button-10.mp3"></audio>
+  <button id="muteBtn">🔇</button>
+
+  <script>
+  //QUESTIONS
+    const questions = [
+      {
+        question: "What is the capital of France?",
+        answers: ["Berlin", "Paris", "Madrid", "London"],
+        correctIndex: 1
+      },
+      {
+        question: "Which planet is known as the Red Planet?",
+        answers: ["Earth", "Saturn", "Mars", "Venus"],
+        correctIndex: 2
+      },
+      {
+        question: "What is 5 + 3?",
+        answers: ["5", "8", "10", "7"],
+        correctIndex: 1
+      },
+      {
+        question: "Which language runs in a web browser?",
+        answers: ["Java", "C", "Python", "JavaScript"],
+        correctIndex: 3
+      },
+      {
+        question: "What does HTML stand for?",
+        answers: [
+          "Hypertext Markup Language",
+          "Hypertext Markdown Language",
+          "Hyperloop Machine Language",
+          "Helicopters Terminals Motorboats Lamborginis"
+        ],
+        correctIndex: 0
+      }
+    ];
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let userName = "";
+    let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+
+
+    // DOM Elements
+    const nameCard = document.getElementById("nameCard");
+    const userNameInput = document.getElementById("userNameInput");
+    // const userNameDisplay = document.getElementById("userNameDisplay");
+    const quizContainer = document.getElementById("quizContainer");
+    const questionEl = document.getElementById("question");
+    const answerButtons = document.getElementById("answerButtons");
+    const feedbackEl = document.getElementById("feedback");
+    const correctAnswerEl = document.getElementById("correctAnswerText");
+    const nextBtn = document.getElementById("nextBtn");
+    const startBtn = document.getElementById("startBtn");
+    const finalScoreContainer = document.getElementById("finalScoreContainer");
+    const finalUserName = document.getElementById("finalUserName");
+    const finalScore = document.getElementById("finalScore");
+    const totalQuestions = document.getElementById("totalQuestions");
+    const progressBar = document.getElementById("progressBar");
+    const restartBtn = document.getElementById("restartBtn");
+
+    // Audio Elements
+    const music = document.getElementById("bgMusic");
+    const musicBtn = document.getElementById("musicBtn");
+    const muteBtn = document.getElementById("muteBtn");
+    const buttonSound = document.getElementById("buttonSound");
+    const nextSound = document.getElementById("nextSound");
+    const correctSound = document.getElementById("correctSound");
+    const wrongSound = document.getElementById("wrongSound");
+
+    // Start Quiz
+    startBtn.addEventListener("click", () => {
+      playButtonSound();
+      const name = userNameInput.value.trim();
+      if (name === "") {
+        alert("Please enter your name.");
+        return;
+      }
+      userName = name;
+      // userNameDisplay.textContent = userName;
+      nameCard.classList.add("hidden");
+      quizContainer.classList.remove("hidden");
+      updateProgress();
+      showQuestion();
+    });
+
+    // Show Question
+    function showQuestion() {
+      const q = questions[currentQuestionIndex];
+      questionEl.textContent = q.question;
+      answerButtons.innerHTML = "";
+      feedbackEl.textContent = "";
+      correctAnswerEl.textContent = "";
+      nextBtn.classList.add("hidden");
+
+      q.answers.forEach((answer, i) => {
+        const btn = document.createElement("button");
+        btn.textContent = answer;
+        btn.classList.add("answer-btn");
+        btn.addEventListener("click", () => handleAnswer(i));
+        answerButtons.appendChild(btn);
+      });
+    }
+
+    // Handle Answer
+    function handleAnswer(selectedIndex) {
+      const q = questions[currentQuestionIndex];
+      const isCorrect = selectedIndex === q.correctIndex;
+
+      if (isCorrect) {
+        feedbackEl.textContent = "✅ Correct!";
+        feedbackEl.style.color = "green";
+        score++;
+        playCorrectSound();
+      } else {
+        feedbackEl.textContent = "❌ Incorrect!";
+        feedbackEl.style.color = "red";
+        correctAnswerEl.textContent = "✔ Correct Answer: " + q.answers[q.correctIndex];
+        playWrongSound();
+      }
+
+      Array.from(answerButtons.children).forEach(btn => {
+        btn.disabled = true;
+        if (btn.textContent === q.answers[q.correctIndex]) {
+          btn.style.backgroundColor = "#2ed573";
+          btn.style.color = "white";
+        } else if (btn.textContent === q.answers[selectedIndex] && !isCorrect) {
+          btn.style.backgroundColor = "#ff4757";
+          btn.style.color = "white";
+        }
+      });
+      nextBtn.classList.remove("hidden");
+    }
+
+    // Next Question
+    nextBtn.addEventListener("click", () => {
+      playNextSound();
+      currentQuestionIndex++;
+      if (currentQuestionIndex < questions.length) {
+        showQuestion();
+        updateProgress();
+      } else {
+        showFinalScore();
+      }
+    });
+
+    // Update Progress
+    function updateProgress() {
+      let progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+      progressBar.style.width = progress + "%";
+    }
+
+    // Show Final Score
+    function showFinalScore() {
+      quizContainer.classList.add("hidden");
+      finalScoreContainer.classList.remove("hidden");
+      finalUserName.textContent = userName;
+      finalScore.textContent = score;
+      totalQuestions.textContent = questions.length;
+
+      const percentage = Math.round((score / questions.length) * 100);
+      document.getElementById("percentageScore").innerText = percentage + "%";
+
+      updateLeaderboard(userName, score);
+      displayLeaderboard();
+      createConfetti();
+    }
+
+    updateLeaderboard(userName, score);
+
+    displayLeaderboard();
+
+    createConfetti();
+    
+
+    function share(platform) {
+      const name = userName || "a friend";
+      const scoreText = `I just scored ${score} out of ${questions.length} in the Quiz! 🎉`;
+      const message = `${name} invites you to try this  Quiz! ✨\n${scoreText}`;
+      const url = encodeURIComponent(window.location.href);
+      const text = encodeURIComponent(message);
+      let shareUrl = "";
+
+      switch (platform) {
+        case 'facebook':
+          shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+          break;
+        case 'twitter':
+          shareUrl = `https://x.com/intent/tweet?text=${text}&url=${url}`;
+          break;
+        case 'instagram':
+          alert("Instagram does not support direct web sharing. Please copy the link instead.");
+          return;
+        case 'whatsapp':
+          shareUrl = `https://api.whatsapp.com/send?text=${text} ${url}`;
+          break;
+        case 'email':
+          shareUrl = `mailto:?subject=Quiz&body=${text} ${url}`;
+          break;
+        default:
+          alert("Sharing not supported.");
+          return;
+      }
+
+      window.open(shareUrl, '_blank');
+    }
+
+    function copyLink() {
+      const link = window.location.href;
+      navigator.clipboard.writeText(link)
+        .then(() => alert("🔗 Link copied to clipboard!"))
+        .catch(() => alert("Failed to copy link."));
+    }
+
+    function updateLeaderboard(name, score) {
+      const storedLeaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+      storedLeaderboard.push({ name, score });
+
+      // Sort and keep top 10
+      storedLeaderboard.sort((a, b) => b.score - a.score);
+      const topScores = storedLeaderboard.slice(0, 10);
+
+      // Save updated leaderboard
+      localStorage.setItem("leaderboard", JSON.stringify(topScores));
+    }
+
+
+    function displayLeaderboard() {
+      const leaderboardCard = document.getElementById("leaderboardCard");
+      const leaderboardTableBody = document.querySelector("#leaderboardTable tbody");
+
+      leaderboardCard.style.display = "block";
+      leaderboardTableBody.innerHTML = "";
+
+      const updatedLeaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+
+      updatedLeaderboard.forEach((entry, index) => {
+        const row = document.createElement("tr");
+
+        const rankCell = document.createElement("td");
+        rankCell.textContent = index + 1;
+
+        const nameCell = document.createElement("td");
+        nameCell.textContent = entry.name;
+
+        const scoreCell = document.createElement("td");
+        scoreCell.textContent = entry.score;
+
+        row.appendChild(rankCell);
+        row.appendChild(nameCell);
+        row.appendChild(scoreCell);
+
+        leaderboardTableBody.appendChild(row);
+      });
+    }
+
+
+
+    // Add confetti effect
+    createConfetti();
+
+
+    function createConfetti() {
+      const colors = ['#ff6b6b', '#ffa502', '#2ed573', '#1e90ff', '#ff4757'];
+      const container = finalScoreContainer;
+
+      for (let i = 0; i < 50; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.left = Math.random() * 100 + '%';
+        confetti.style.top = -10 + 'px';
+        confetti.style.transform = 'rotate(' + Math.random() * 360 + 'deg)';
+        container.appendChild(confetti);
+
+        animateConfetti(confetti);
+      }
+    }
+
+    function animateConfetti(confetti) {
+      const duration = Math.random() * 3 + 2;
+      const rotation = Math.random() * 360;
+
+      confetti.style.opacity = '1';
+      confetti.style.animation = `confetti-fall ${duration}s linear forwards`;
+
+      // Create keyframes dynamically
+      const style = document.createElement('style');
+      style.innerHTML = `
+        @keyframes confetti-fall {
+          0% {
+            transform: translateY(0) rotate(0deg);
+            opacity: 1;
+          }
+          100% {
+            transform: translateY(500px) rotate(${rotation}deg);
+            opacity: 0;
+          }
+        }
+      `;
+      document.head.appendChild(style);
+
+      // Remove confetti after animation
+      setTimeout(() => {
+        confetti.remove();
+        style.remove();
+      }, duration * 1000);
+    }
+
+    // Restart Quiz
+    restartBtn.addEventListener("click", () => {
+      playButtonSound();
+      currentQuestionIndex = 0;
+      score = 0;
+      userNameInput.value = "";
+
+      finalScoreContainer.classList.add("hidden");
+      quizContainer.classList.add("hidden");
+      nameCard.classList.remove("hidden");
+
+      // Hide leaderboard
+      document.getElementById("leaderboardCard").style.display = "none";
+
+      progressBar.style.width = "0%";
+    });
+
+
+    // Clear the name input
+    userNameInput.value = "";
+
+    // Hide all containers except name input
+    finalScoreContainer.classList.add("hidden");
+    quizContainer.classList.add("hidden");
+    nameCard.classList.remove("hidden");
+
+    // Reset progress bar
+    progressBar.style.width = "0%";
+    ;
+
+    // Audio Controls
+    musicBtn.addEventListener("click", () => {
+      const icon = musicBtn.querySelector("i");
+      if (music.paused) {
+        music.play();
+        icon.classList.replace("fa-play", "fa-pause");
+      } else {
+        music.pause();
+        icon.classList.replace("fa-pause", "fa-play");
+      }
+    });
+
+    // Sound Effects
+    function playButtonSound() {
+      buttonSound.currentTime = 0;
+      buttonSound.play();
+    }
+
+    function playNextSound() {
+      nextSound.currentTime = 0;
+      nextSound.play();
+    }
+
+    function playCorrectSound() {
+      correctSound.currentTime = 0;
+      correctSound.play();
+    }
+
+    function playWrongSound() {
+      wrongSound.currentTime = 0;
+      wrongSound.play();
+    }
+
+    // Mute Controls
+    let isMuted = false;
+    muteBtn.addEventListener("click", () => {
+      isMuted = !isMuted;
+      muteBtn.innerHTML = isMuted ? "🔊" : "🔇";
+      document.querySelectorAll("audio").forEach(audio => {
+        audio.muted = isMuted;
+      });
+    });
+
+    // Allow Enter key to start quiz
+    userNameInput.addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        startBtn.click();
+      }
+    });
+
+
+
+  </script>
+
+</body>
+
+</html>
