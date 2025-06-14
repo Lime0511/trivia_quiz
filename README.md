@@ -14,7 +14,7 @@ Added answer reveal functionality.
 
 Applied basic CSS styling for layout and buttons.
 
-<ins>Iteration 2:</ins>
+# <ins>Iteration 2:</ins>
 
 Added welcome screen with user name input.
 
