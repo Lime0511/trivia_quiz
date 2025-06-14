@@ -14,7 +14,7 @@ Added answer reveal functionality.
 
 Applied basic CSS styling for layout and buttons.
 
-Iteration 2
+Iteration 2：
 Added welcome screen with user name input.
 
 Implemented scoring system and feedback for correct/incorrect answers.
