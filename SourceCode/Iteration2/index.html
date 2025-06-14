@@ -19,7 +19,41 @@
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-    /* Add other basic styles later */
+    .quiz-container {
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  border: 5px solid black;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  background: #D1E9F6;
+}
+#nameCard {
+  animation: fadeIn 1.5s ease-in-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+input {
+  width: 60%;
+  max-width: 300px;
+  padding: 9px;
+  font-size: 17px;
+  border-radius: 5px;
+  border: 1px solid black;
+  font-family: 'Gill Sans MT', Courier, monospace;
+  text-align: center;
+  text-transform: capitalize;
+}
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+/* Add other styles for buttons, feedback, stats, etc. */
+
   </style>
 </head>
 <body>
