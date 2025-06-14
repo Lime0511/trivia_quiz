@@ -14,7 +14,7 @@ Added answer reveal functionality.
 
 Applied basic CSS styling for layout and buttons.
 
-# <ins>Iteration 2:</ins>
+<ins>Iteration 2:</ins>
 
 Added welcome screen with user name input.
 
@@ -42,7 +42,7 @@ Improved UI styling and animations.
 
 Added audio controls and mute functionality.
 
- <ins>Branching and Merging Strategy:</ins>
+# Branching and Merging Strategy:
 
 For each iteration, a separate branch (iteration-1, iteration-2, iteration-3) was created to isolate development.
 
@@ -54,7 +54,7 @@ Tags (v1.0, v2.0, v3.0) were created after merging each iteration to mark stable
 
 This strategy allowed organized, incremental development and easy tracking of progress.
 
-<ins>How This Workflow Helped:</ins>
+# How This Workflow Helped:
 
 Using branches for each iteration prevented conflicts and allowed focused development on features.
 
@@ -64,7 +64,7 @@ Tagging provided clear milestones for each version, simplifying version control 
 
 The workflow supported clear documentation of progress and made collaboration easier.
 
-<ins>How to Run the Quiz:</ins>
+# How to Run the Quiz:
 
 Clone the repository or download the source code.
 
