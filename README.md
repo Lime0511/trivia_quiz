@@ -72,5 +72,17 @@
 
 - For the full experience, use Iteration 3 with audio and leaderboard features.
 
-- Enjoy the quiz!
+## PHP and Database Integration
+- The project uses PHP scripts to connect to a MySQL/MariaDB database.
+- `db.php`: Handles the database connection.
+- `save_score.php`: Receives quiz results and saves them to the `leaderboard` table.
+- `get_leaderboard.php`: Retrieves leaderboard data for display.
+- The database structure is defined in `quiz_db.sql` (see `/database` folder).
+
+## Setup Steps:
+1. Import the SQL file into your database (see Database Setup section).
+2. Edit `db.php` with your local database credentials.
+3. Place all files in your web server's root directory (e.g., `htdocs` for XAMPP).
+4. Open the HTML files in your browser to use the quiz.
+
 
