@@ -9,5 +9,19 @@
   <audio id="bgMusic" src="qmusic1.mp3" loop></audio>
   <audio id="correctSound" src="correct.mp3"></audio>
   <audio id="wrongSound" src="wrong.mp3"></audio>
-  <!-- Rest of body content -->
+<div id="nameCard">
+  <h1>Welcome to the Quiz!</h1>
+  <input type="text" id="userNameInput" placeholder="Enter your name" />
+  <button id="startBtn">Start Quiz</button>
+</div>
+
+<div id="quizContainer" class="hidden">
+  <div id="progressBarContainer">
+    <div id="progressBar"></div>
+  </div>
+  <div id="questionText"></div>
+  <div id="options"></div>
+  <div id="answerReveal"></div>
+  <button id="nextBtn" class="hidden">Next</button>
+</div>
 </body>
