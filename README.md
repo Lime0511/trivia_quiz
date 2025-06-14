@@ -5,20 +5,20 @@
 
 ## Iteration Report
 
-### Iteration 1:
+### <ins>Iteration 1:<ins/>
 - Added basic HTML structure and quiz layout.
 - Implemented question display with answer buttons.
 - Added answer reveal functionality.
 - Applied basic CSS styling for layout and buttons.
 
-### Iteration 2:
+### <ins>Iteration 2:<ins/>
 - Added welcome screen with user name input.
 - Implemented scoring system and feedback for correct/incorrect answers.
 - Added final score display and leaderboard layout.
 - Enhanced CSS styling with animations and responsive design.
 - Added restart quiz functionality.
 
-### Iteration 3:
+### <ins>Iteration 3:<ins/>
 - Integrated Font Awesome icons and audio elements for background music and sound effects.
 - Added progress bar to show quiz progress.
 - Implemented leaderboard persistence using localStorage.
