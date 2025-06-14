@@ -1,10 +1,10 @@
 # Trivia Quiz Project
 
-# Project Description:
+## Project Description:
 This is a simple trivia quiz web application developed in three iterations. The quiz allows users to answer multiple-choice questions, see their scores, and view a leaderboard. The project demonstrates progressive development using HTML, CSS, and JavaScript, with enhanced features added in each iteration.
 
-# Iteration Report
-## Iteration 1:
+## Iteration Report
+### Iteration 1:
 
 Added basic HTML structure and quiz layout.
 
@@ -14,7 +14,7 @@ Added answer reveal functionality.
 
 Applied basic CSS styling for layout and buttons.
 
-## Iteration 2:
+### Iteration 2:
 
 Added welcome screen with user name input.
 
@@ -26,7 +26,7 @@ Enhanced CSS styling with animations and responsive design.
 
 Added restart quiz functionality.
 
-## Iteration 3:
+### Iteration 3:
 
 Integrated Font Awesome icons and audio elements for background music and sound effects.
 
@@ -42,7 +42,7 @@ Improved UI styling and animations.
 
 Added audio controls and mute functionality.
 
-# Branching and Merging Strategy:
+## Branching and Merging Strategy:
 
 For each iteration, a separate branch (iteration-1, iteration-2, iteration-3) was created to isolate development.
 
@@ -54,7 +54,7 @@ Tags (v1.0, v2.0, v3.0) were created after merging each iteration to mark stable
 
 This strategy allowed organized, incremental development and easy tracking of progress.
 
-# How This Workflow Helped:
+## How This Workflow Helped:
 
 Using branches for each iteration prevented conflicts and allowed focused development on features.
 
@@ -64,7 +64,7 @@ Tagging provided clear milestones for each version, simplifying version control 
 
 The workflow supported clear documentation of progress and made collaboration easier.
 
-# How to Run the Quiz:
+## How to Run the Quiz:
 
 Clone the repository or download the source code.
 
