@@ -57,3 +57,13 @@
 2. Edit `db.php` with your local database credentials.
 3. Place all files in your web server's root directory (e.g., `htdocs` for XAMPP).
 4. Open the HTML files in your browser to use the quiz.
+
+## Kanban Board for Task Management
+- We used ClickUp to manage our project tasks using a Kanban board. The board included columns for Backlog, To Do, In Progress, Testing, and Done. Each iteration was broken down into small, actionable tasks, and each task was tracked as a card on the board.
+- As we progressed, tasks were moved across columns to reflect their status. This helped us visualise our workflow, prioritise tasks, and identify any bottlenecks early. The Kanban board also made it easier to collaborate and ensure nothing was overlooked.
+
+## Challenges:
+- Occasionally, some tasks took longer than expected and remained in In Progress or Testing for longer periods. However, using ClickUp’s board view made it easy to reassign or reprioritise tasks as needed.
+
+
+
