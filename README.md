@@ -4,7 +4,7 @@
 - This is a simple trivia quiz web application developed in three iterations. The quiz allows users to answer multiple-choice questions, see their scores, and view a leaderboard. The project demonstrates progressive development using HTML, CSS, and JavaScript, with enhanced features added in each iteration.
 
 ## Iteration Report
-### Iteration 1:
+<ins>Iteration 1:<ins/>
 
 - Added basic HTML structure and quiz layout.
 
@@ -14,7 +14,7 @@
 
 - Applied basic CSS styling for layout and buttons.
 
-### Iteration 2:
+<ins>Iteration 2:<ins/>
 
 - Added welcome screen with user name input.
 
@@ -26,7 +26,7 @@
 
 - Added restart quiz functionality.
 
-### Iteration 3:
+<ins>Iteration 3:<ins/>
 
 - Integrated Font Awesome icons and audio elements for background music and sound effects.
 
@@ -72,7 +72,7 @@
 
 - For the full experience, use Iteration 3 with audio and leaderboard features.
 
-## PHP and Database Integration
+## PHP and Database Integration:
 - The project uses PHP scripts to connect to a MySQL/MariaDB database.
 - `db.php`: Handles the database connection.
 - `save_score.php`: Receives quiz results and saves them to the `leaderboard` table.
