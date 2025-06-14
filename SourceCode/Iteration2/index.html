@@ -89,6 +89,122 @@ input {
   </div>
   <button id="restartBtn">Restart Quiz</button>
 </div>
+<script>
+  const questions = [
+    { question: "What is the capital of France?", answers: ["Berlin", "Paris", "Madrid", "London"], correctIndex: 1 },
+    { question: "Which planet is known as the Red Planet?", answers: ["Earth", "Saturn", "Mars", "Venus"], correctIndex: 2 },
+    { question: "What is 5 + 3?", answers: ["5", "8", "10", "7"], correctIndex: 1 },
+    { question: "Which language runs in a web browser?", answers: ["Java", "C", "Python", "JavaScript"], correctIndex: 3 },
+    { question: "What does HTML stand for?", answers: ["Hypertext Markup Language", "Hypertext Markdown Language", "Hyperloop Machine Language", "Helicopters Terminals Motorboats Lamborginis"], correctIndex: 0 }
+  ];
+
+  let currentQuestion = 0;
+  let score = { correct: 0, incorrect: 0 };
+  let playerName = "";
+
+  const nameCard = document.getElementById('nameCard');
+  const quizScreen = document.getElementById('quizScreen');
+  const resultScreen = document.getElementById('resultScreen');
+  const userNameInput = document.getElementById('userNameInput');
+  const playerNameDisplay = document.getElementById('playerName');
+  const questionElement = document.getElementById('question');
+  const optionsElement = document.getElementById('options');
+  const feedbackElement = document.getElementById('feedback');
+  const nextButton = document.getElementById('nextBtn');
+  const correctCount = document.getElementById('correctCount');
+  const incorrectCount = document.getElementById('incorrectCount');
+  const percentageDisplay = document.getElementById('percentage');
+  const resultName = document.getElementById('resultName');
+  const finalCorrect = document.getElementById('finalCorrect');
+  const finalIncorrect = document.getElementById('finalIncorrect');
+  const finalPercentage = document.getElementById('finalPercentage');
+
+  document.getElementById('startBtn').addEventListener('click', () => {
+    const name = userNameInput.value.trim();
+    if (!name) {
+      alert("Please enter your name.");
+      return;
+    }
+    playerName = name;
+    playerNameDisplay.textContent = playerName;
+    nameCard.classList.add("hidden");
+    quizScreen.classList.remove("hidden");
+    showQuestion();
+  });
+
+  nextButton.addEventListener('click', () => {
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+      showQuestion();
+    } else {
+      showResults();
+    }
+  });
+
+  document.getElementById('restartBtn').addEventListener('click', () => {
+    currentQuestion = 0;
+    score = { correct: 0, incorrect: 0 };
+    resultScreen.classList.add("hidden");
+    nameCard.classList.remove("hidden");
+    userNameInput.value = "";
+  });
+
+  function showQuestion() {
+    const q = questions[currentQuestion];
+    questionElement.textContent = q.question;
+    optionsElement.innerHTML = "";
+    feedbackElement.classList.add("hidden");
+    nextButton.classList.add("hidden");
+
+    q.answers.forEach((opt, index) => {
+      const btn = document.createElement("button");
+      btn.textContent = opt;
+      btn.addEventListener("click", () => handleAnswer(index));
+      optionsElement.appendChild(btn);
+    });
+  }
+
+  function handleAnswer(selectedIndex) {
+    const q = questions[currentQuestion];
+    const isCorrect = selectedIndex === q.correctIndex;
+
+    const buttons = optionsElement.querySelectorAll("button");
+
+    buttons.forEach((btn, i) => {
+      btn.disabled = true;
+      if (i === q.correctIndex) {
+        btn.classList.add("correct");
+      } else if (i === selectedIndex) {
+        btn.classList.add("incorrect");
+      }
+    });
+
+    feedbackElement.classList.remove("hidden");
+    if (isCorrect) {
+      feedbackElement.textContent = "✅ Correct!";
+      feedbackElement.style.color = "green";
+      score.correct++;
+    } else {
+      feedbackElement.textContent = "❌ Incorrect!";
+      feedbackElement.style.color = "red";
+      score.incorrect++;
+    }
+
+    nextButton.classList.remove("hidden");
+  }
+
+  function showResults() {
+    quizScreen.classList.add("hidden");
+    resultScreen.classList.remove("hidden");
+
+    resultName.textContent = playerName;
+    finalCorrect.textContent = score.correct;
+    finalIncorrect.textContent = score.incorrect;
+    const total = score.correct + score.incorrect;
+    const finalPercent = total > 0 ? Math.round((score.correct / total) * 100) : 0;
+    finalPercentage.textContent = finalPercent;
+  }
+</script>
 
 </body>
 </html>
