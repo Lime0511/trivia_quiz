@@ -4,7 +4,7 @@
 This is a simple trivia quiz web application developed in three iterations. The quiz allows users to answer multiple-choice questions, see their scores, and view a leaderboard. The project demonstrates progressive development using HTML, CSS, and JavaScript, with enhanced features added in each iteration.
 
 # Iteration Report
-Iteration 1：
+<u>Iteration 1：</u>
 
 Added basic HTML structure and quiz layout.
 
