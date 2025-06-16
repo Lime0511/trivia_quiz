@@ -16,7 +16,8 @@
       font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
       text-align: center;
       margin: 20px;
-      background: linear-gradient(135deg, #FC819E, #fad0c4);
+      /* background: linear-gradient(135deg, darkblue, #fad0c4); */
+      background: linear-gradient(135deg, darkblue, hotpink);
       background-size: 400% 400%;
       animation: gradientAnimation 10s infinite ease-in-out;
       min-height: 100vh;
@@ -115,6 +116,9 @@
       width: 90%;
       text-align: center;
       margin-left: 6%;
+
+      animation: fadeIn 0.5s ease-in-out;
+
     }
 
     /* Next/Previous Button */
@@ -167,6 +171,45 @@
       border-radius: 10px;
       transition: width 0.5s ease-in-out;
     }
+
+    .timer {
+      font-size: 22px;
+      font-weight: bold;
+      color: darkblue;
+      margin-top: 15px;
+      padding: 10px 20px;
+      border: 2px solid #0f3057;
+      border-radius: 10px;
+      display: inline-block;
+      /* background-color: floralwhite; */
+      background-color: #333446;
+
+      animation: pulse 1s infinite;
+      display: inline-block;
+      text-align: center;
+      margin: 10px auto;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+      }
+
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
 
     /* QUIZ OPTIONS */
     .options {
@@ -263,10 +306,24 @@
       font-size: 1.8rem;
       margin: 20px 0;
       padding: 15px;
-      background: linear-gradient(135deg, #FEEE91, #fad0c4);
+      /* background: linear-gradient(135deg, #FEEE91, #fad0c4); */
+      background: linear-gradient(135deg, #fff3cd, #ffeaa7);
       border-radius: 10px;
-      border: 3px solid black;
+      border: 2px solid #f7d794;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      animation: popIn 0.6s ease-out;
+    }
+
+    @keyframes popIn {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
     }
 
     #leaderboardCard {
@@ -278,12 +335,29 @@
       max-width: 400px;
       margin-left: auto;
       margin-right: auto;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     #leaderboardTable {
       width: 100%;
       border-collapse: collapse;
       margin-top: 10px;
+
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
     }
 
     #leaderboardTable th,
@@ -296,6 +370,7 @@
     #leaderboardTable th {
       background-color: #e2e2e2;
       font-weight: bold;
+      color: #333;
     }
 
     #leaderboardTable tbody tr:nth-child(even) {
@@ -305,9 +380,9 @@
     .restart-section {
       margin-top: 30px;
       padding: 20px;
-      background: #7BD3EA;
+      background: lightpink;
       border-radius: 15px;
-      border: 3px dashed #5b86e5;
+      border: 3px dashed white;
     }
 
     .restart-title {
@@ -321,7 +396,7 @@
       padding: 12px 30px;
       background: linear-gradient(to right, #36d1dc, #5b86e5);
       color: white;
-      border: none;
+      border: 3px dashed white;
       border-radius: 50px;
       cursor: pointer;
       transition: all 0.3s ease;
@@ -409,6 +484,8 @@
     .share-buttons button:hover {
       filter: brightness(1.2);
       box-shadow: 0 0 15px rgba(238, 174, 202, 0.8);
+      transform: scale(1.1);
+
     }
 
 
@@ -469,6 +546,8 @@
     <div class="buttons">
       <button id="nextBtn" class="hidden">Next</button>
     </div>
+    <p class="timer" id="timerText">⏱️ Time left: <span id="timeLeft">15</span> seconds</p>
+
   </div>
 
 
@@ -477,7 +556,7 @@
     <h2 class="result-header">🎉 Quiz Completed! 🎉</h2>
 
     <div class="score-display">
-      <p>Well done, <strong><span id="finalUserName"></span></strong>!</p>
+      <p>✨Well done, <strong><span id="finalUserName"></span></strong>!✨</p>
       <p>You scored <strong><span id="finalScore"></span></strong> out of <strong><span
             id="totalQuestions"></span></strong></p>
       <p>Your percentage: <strong><span id="percentageScore"></span></strong></p>
@@ -492,11 +571,11 @@
           <tr>
             <th>Rank</th>
             <th>Name</th>
-            <th>Score</th>
+            <th>Percentage</th>
           </tr>
         </thead>
         <tbody>
-          <!-- JS will inject rows here -->
+          <!-- Filled by JS -->
         </tbody>
       </table>
     </div>
@@ -527,14 +606,13 @@
     </div>
 
     <div class="restart-section">
-      <h3 class="restart-title">Want to try again?</h3>
-      <p>Challenge yourself to beat your score!</p>
+      <h3 class="restart-title">Try again?</h3>
+      <p>✨Keep going! Challenge yourself to beat your score!✨</p>
       <button id="restartBtn">
-        <i class="fas fa-sync-alt"></i> Take Quiz Again
+        <i class="fas fa-sync-alt"></i>
       </button>
     </div>
   </div>
-
 
 
   <!-- BG MUSIC -->
@@ -543,15 +621,29 @@
     <source src="qmusic1.mp3" type="audio/mp3">
   </audio>
 
+  <!-- TIMER SOUND EFFECT -->
+  <audio id="timerBuzz" src="timer.mp3" type="audio/mp3"></audio>
+
+
   <!-- SOUND EFFECTS -->
   <audio class="sfx" id="buttonSound" src="https://www.soundjay.com/buttons/sounds/button-09.mp3"></audio>
+
   <audio class="sfx" id="nextSound" src="https://www.soundjay.com/buttons/sounds/button-09.mp3"></audio>
-  <audio class="sfx" id="correctSound" src="https://www.soundjay.com/buttons/sounds/button-09.mp3"></audio>
+
+  <!-- <audio class="sfx" id="correctSound" src="https://www.soundjay.com/buttons/sounds/button-09.mp3"></audio> -->
+  <audio class="sfx" id="correctSound" source src="correct.mp3" type="audio/mp3"></audio>
+
   <audio class="sfx" id="wrongSound" src="https://www.soundjay.com/buttons/sounds/button-10.mp3"></audio>
   <button id="muteBtn">🔇</button>
 
+  <!-- RESULT PAGE SOUND EFFECT -->
+  <audio id="resultAudio" src="tung sahur.mp3" type="audio/mp3"></audio>
+
+
   <script>
-  //QUESTIONS
+
+
+    //QUESTIONS
     const questions = [
       {
         question: "What is the capital of France?",
@@ -574,6 +666,31 @@
         correctIndex: 3
       },
       {
+        question: "What is the most dangerous animal in Africa?",
+        answers: ["Lion", "Elephant", "Crocodile", "Hippopotamus"],
+        correctIndex: 3
+      },
+      {
+        question: "Which country is known as the Land of Rising Sun?",
+        answers: ["China", "Japan", "Korea", "Malaysia"],
+        correctIndex: 1
+      },
+      {
+        question: "Which of these singers is from Canada?",
+        answers: ["Ed Sheeran", "Harry Styles", "Shawn Mendes", "Bruno Mars"],
+        correctIndex: 2
+      },
+      {
+        question: "What does the name 'Kuala Lumpur' mean in Malay?",
+        answers: ["Muddy Estuary", "Mountain Valley", "Beautiful City", "River Junction"],
+        correctIndex: 0
+      },
+      {
+        question: "What program is 'Raffles University' famous for?",
+        answers: ["Artificial Intelligence", "Business Management", "Interior Design", "Fashion Design"],
+        correctIndex: 3
+      },
+      {
         question: "What does HTML stand for?",
         answers: [
           "Hypertext Markup Language",
@@ -588,7 +705,7 @@
     let currentQuestionIndex = 0;
     let score = 0;
     let userName = "";
-    let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+    // let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
 
 
     // DOM Elements
@@ -627,7 +744,6 @@
         return;
       }
       userName = name;
-      // userNameDisplay.textContent = userName;
       nameCard.classList.add("hidden");
       quizContainer.classList.remove("hidden");
       updateProgress();
@@ -643,17 +759,84 @@
       correctAnswerEl.textContent = "";
       nextBtn.classList.add("hidden");
 
+      // 🔊 Play timer sound when question starts
+      const timerBuzz = document.getElementById("timerBuzz");
+      timerBuzz.currentTime = 0;
+      timerBuzz.play();
+
       q.answers.forEach((answer, i) => {
         const btn = document.createElement("button");
         btn.textContent = answer;
         btn.classList.add("answer-btn");
-        btn.addEventListener("click", () => handleAnswer(i));
+        btn.addEventListener("click", () => {
+          timerBuzz.pause();
+          timerBuzz.currentTime = 0;
+          handleAnswer(i);
+        });
         answerButtons.appendChild(btn);
       });
+
+      startCountdown(); // Start the countdown timer
+    }
+
+
+    function startCountdown() {
+      timeLeft = 15;
+      timerText.textContent = timeLeft;
+      updateTimerStyle(timeLeft);
+
+      clearInterval(countdownInterval);
+
+      countdownInterval = setInterval(() => {
+        timeLeft--;
+        timerText.textContent = timeLeft;
+        updateTimerStyle(timeLeft);
+
+        if (timeLeft <= 0) {
+          clearInterval(countdownInterval);
+
+          const timerBuzz = document.getElementById("timerBuzz");
+          timerBuzz.pause();
+          timerBuzz.currentTime = 0;
+
+          handleAnswer(-1); 
+        }
+      }, 1000);
+    }
+
+
+    // Countdown Timer
+    let timeLeft = 15;
+    let countdownInterval;
+    const timerText = document.getElementById("timeLeft");
+
+    function updateTimerStyle(seconds) {
+      const timer = document.getElementById("timerText");
+      if (seconds > 10) {
+        // timer.style.color = "#2ecc71"; // green
+        timer.style.color = "#00ffb7"; // green
+
+      } else if (seconds > 5) {
+        // timer.style.color = "#f39c12"; // orange
+        timer.style.color = "#ffcc00"; // orange
+
+      } else {
+        // timer.style.color = "#e74c3c"; // red
+        timer.style.color = "#ff3e3e"; // red
+        timer.style.fontWeight = "bold";
+        timer.style.animation = "shake 0.5s infinite alternate";
+      }
     }
 
     // Handle Answer
     function handleAnswer(selectedIndex) {
+
+      const timerBuzz = document.getElementById("timerBuzz");
+      timerBuzz.pause();
+      timerBuzz.currentTime = 0;
+
+      clearInterval(countdownInterval);
+
       const q = questions[currentQuestionIndex];
       const isCorrect = selectedIndex === q.correctIndex;
 
@@ -679,8 +862,11 @@
           btn.style.color = "white";
         }
       });
+
       nextBtn.classList.remove("hidden");
     }
+
+
 
     // Next Question
     nextBtn.addEventListener("click", () => {
@@ -694,34 +880,13 @@
       }
     });
 
+
     // Update Progress
     function updateProgress() {
       let progress = ((currentQuestionIndex + 1) / questions.length) * 100;
       progressBar.style.width = progress + "%";
     }
 
-    // Show Final Score
-    function showFinalScore() {
-      quizContainer.classList.add("hidden");
-      finalScoreContainer.classList.remove("hidden");
-      finalUserName.textContent = userName;
-      finalScore.textContent = score;
-      totalQuestions.textContent = questions.length;
-
-      const percentage = Math.round((score / questions.length) * 100);
-      document.getElementById("percentageScore").innerText = percentage + "%";
-
-      updateLeaderboard(userName, score);
-      displayLeaderboard();
-      createConfetti();
-    }
-
-    updateLeaderboard(userName, score);
-
-    displayLeaderboard();
-
-    createConfetti();
-    
 
     function share(platform) {
       const name = userName || "a friend";
@@ -762,53 +927,106 @@
         .catch(() => alert("Failed to copy link."));
     }
 
-    function updateLeaderboard(name, score) {
-      const storedLeaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
-      storedLeaderboard.push({ name, score });
 
-      // Sort and keep top 10
-      storedLeaderboard.sort((a, b) => b.score - a.score);
-      const topScores = storedLeaderboard.slice(0, 10);
-
-      // Save updated leaderboard
-      localStorage.setItem("leaderboard", JSON.stringify(topScores));
+    function updateLeaderboard(name, percentage) {
+      fetch("https://triviaquiz4ever.infy.uk/save_score.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: `name=${encodeURIComponent(name)}&percentage=${percentage}`
+      })
+        .then(res => res.text())
+        .then(msg => console.log("✅ Saved:", msg))
+        .catch(err => console.error("❌ Save failed:", err));
     }
 
 
     function displayLeaderboard() {
-      const leaderboardCard = document.getElementById("leaderboardCard");
-      const leaderboardTableBody = document.querySelector("#leaderboardTable tbody");
+      fetch("https://triviaquiz4ever.infy.uk/get_leaderboard.php")
+        .then(res => res.json())
+        .then(data => {
+          console.log("🎯 Leaderboard data:", data); 
+          const leaderboardTableBody = document.querySelector("#leaderboardTable tbody");
+          leaderboardTableBody.innerHTML = "";
 
-      leaderboardCard.style.display = "block";
-      leaderboardTableBody.innerHTML = "";
-
-      const updatedLeaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
-
-      updatedLeaderboard.forEach((entry, index) => {
-        const row = document.createElement("tr");
-
-        const rankCell = document.createElement("td");
-        rankCell.textContent = index + 1;
-
-        const nameCell = document.createElement("td");
-        nameCell.textContent = entry.name;
-
-        const scoreCell = document.createElement("td");
-        scoreCell.textContent = entry.score;
-
-        row.appendChild(rankCell);
-        row.appendChild(nameCell);
-        row.appendChild(scoreCell);
-
-        leaderboardTableBody.appendChild(row);
-      });
+          data.forEach((entry, index) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+          <td>${index + 1}</td>
+          <td>${entry.name}</td>
+          <td>${entry.percentage}%</td>
+        `;
+            leaderboardTableBody.appendChild(row);
+          });
+        })
+        .catch(err => console.error("❌ Error loading leaderboard:", err));
     }
 
+
+    function updateLeaderboard(name, percentage) {
+      return fetch("https://triviaquiz4ever.infy.uk/save_score.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: `name=${encodeURIComponent(name)}&percentage=${percentage}`
+      })
+        .then(res => res.text())
+        .then(msg => {
+          console.log("📡 Server response:", msg);
+        })
+        .catch(err => {
+          console.error("❌ Failed to save:", err);
+        });
+    }
+
+
+    function displayLeaderboard() {
+      fetch("https://triviaquiz4ever.infy.uk/get_leaderboard.php")
+        .then(res => res.json())
+        .then(data => {
+          const tbody = document.querySelector("#leaderboardTable tbody");
+          tbody.innerHTML = "";
+          data.forEach((entry, index) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+          <td>${index + 1}</td>
+          <td>${entry.name}</td>
+          <td>${entry.percentage}%</td>
+        `;
+            tbody.appendChild(row);
+          });
+        })
+        .catch(err => console.error("❌ Error loading leaderboard:", err));
+    }
+
+    function showFinalScore() {
+      const resultAudio = document.getElementById("resultAudio");
+      resultAudio.currentTime = 0;
+      resultAudio.loop = true;
+      resultAudio.play();
+
+      quizContainer.classList.add("hidden");
+      finalScoreContainer.classList.remove("hidden");
+      finalUserName.textContent = userName;
+      finalScore.textContent = score;
+      totalQuestions.textContent = questions.length;
+
+      const percentage = Math.round((score / questions.length) * 100);
+      document.getElementById("percentageScore").innerText = percentage + "%";
+
+      updateLeaderboard(userName, percentage).then(() => {
+        displayLeaderboard();
+        document.getElementById("leaderboardCard").style.display = "block";
+      });
+
+      createConfetti();
+    }
 
 
     // Add confetti effect
     createConfetti();
-
 
     function createConfetti() {
       const colors = ['#ff6b6b', '#ffa502', '#2ed573', '#1e90ff', '#ff4757'];
@@ -857,6 +1075,7 @@
       }, duration * 1000);
     }
 
+
     // Restart Quiz
     restartBtn.addEventListener("click", () => {
       playButtonSound();
@@ -864,15 +1083,22 @@
       score = 0;
       userNameInput.value = "";
 
+      const resultAudio = document.getElementById("resultAudio");
+      resultAudio.pause();
+      resultAudio.currentTime = 0;
+      resultAudio.loop = false;
+
       finalScoreContainer.classList.add("hidden");
       quizContainer.classList.add("hidden");
       nameCard.classList.remove("hidden");
-
-      // Hide leaderboard
-      document.getElementById("leaderboardCard").style.display = "none";
-
-      progressBar.style.width = "0%";
     });
+
+
+    // Hide leaderboard
+    document.getElementById("leaderboardCard").style.display = "none";
+
+    progressBar.style.width = "0%";
+
 
 
     // Clear the name input
@@ -924,7 +1150,7 @@
     let isMuted = false;
     muteBtn.addEventListener("click", () => {
       isMuted = !isMuted;
-      muteBtn.innerHTML = isMuted ? "🔊" : "🔇";
+      muteBtn.innerHTML = isMuted ? "🔇" : "🔊";
       document.querySelectorAll("audio").forEach(audio => {
         audio.muted = isMuted;
       });
@@ -937,8 +1163,6 @@
         startBtn.click();
       }
     });
-
-
 
   </script>
 
