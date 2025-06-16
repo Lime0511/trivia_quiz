@@ -30,8 +30,6 @@
 ## Branching and Merging Strategy:
 - For each iteration, a separate branch (`iteration-1`, `iteration-2`, `iteration-3`) was created to isolate development.
 - Features were developed and tested within their respective branches.
-- After completing each iteration, the branch was merged into the main branch to keep the main codebase stable and up-to-date.
-- Tags (`v1.0`, `v2.0`, `v3.0`) were created after merging each iteration to mark stable release points.
 - This strategy allowed organised, incremental development and easy tracking of progress.
 
 ## Kanban Board for Task Management
