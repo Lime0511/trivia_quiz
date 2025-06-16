@@ -34,36 +34,8 @@
 - Tags (`v1.0`, `v2.0`, `v3.0`) were created after merging each iteration to mark stable release points.
 - This strategy allowed organised, incremental development and easy tracking of progress.
 
-## How This Workflow Helped:
-- Using branches for each iteration prevented conflicts and allowed focused development on features.
-- Merging ensured that the main branch always contained the latest stable code.
-- Tagging provided clear milestones for each version, simplifying version control and review.
-- The workflow supported clear documentation of progress and made collaboration easier.
-
-## How to Run the Quiz:
-- Clone the repository or download the source code.
-- Open `SourceCode/Iteration3/index.html` (or any iteration folder) in a modern web browser.
-- For the full experience, use Iteration 3 with audio and leaderboard features.
-
-## PHP and Database Integration:
-- The project uses PHP scripts to connect to a MySQL/MariaDB database.
-- `db.php`: Handles the database connection.
-- `save_score.php`: Receives quiz results and saves them to the `leaderboard` table.
-- `get_leaderboard.php`: Retrieves leaderboard data for display.
-- The database structure is defined in `quiz_db.sql` (see `/database` folder).
-
-## Setup Steps:
-1. Import the SQL file into your database (see Database Setup section).
-2. Edit `db.php` with your local database credentials.
-3. Place all files in your web server's root directory (e.g., `htdocs` for XAMPP).
-4. Open the HTML files in your browser to use the quiz.
-
 ## Kanban Board for Task Management
 - We used ClickUp to manage our project tasks using a Kanban board. The board included columns for Backlog, To Do, In Progress, Testing, and Done. Each iteration was broken down into small, actionable tasks, and each task was tracked as a card on the board.
 - As we progressed, tasks were moved across columns to reflect their status. This helped us visualise our workflow, prioritise tasks, and identify any bottlenecks early. The Kanban board also made it easier to collaborate and ensure nothing was overlooked.
-
-## Challenges:
-- Occasionally, some tasks took longer than expected and remained in In Progress or Testing for longer periods. However, using ClickUp’s board view made it easy to reassign or reprioritise tasks as needed.
-
 
 
