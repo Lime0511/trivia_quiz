@@ -1,1 +1,23 @@
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# IDE/editor settings
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Temporary/backup files
+*~
+*.bak
+
+# Environment variables
+.env
+
+# Node.js dependencies (if any in future)
+node_modules/
+
+# Don't ignore PHP, HTML, JS, CSS, MP3 — they are needed in your project
 
