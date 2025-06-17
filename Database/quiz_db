@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jun 14, 2025 at 02:34 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Host: sql207.infinityfree.com
+-- Generation Time: Jun 16, 2025 at 03:01 AM
+-- Server version: 10.6.19-MariaDB
+-- PHP Version: 7.2.22
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `quiz_db`
+-- Database: `if0_39239138_quiz_db`
 --
 
 -- --------------------------------------------------------
@@ -29,16 +30,18 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `leaderboard` (
   `id` int(11) NOT NULL,
-  `name` varchar(100) DEFAULT NULL,
-  `percentage` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `name` varchar(100) NOT NULL,
+  `percentage` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `leaderboard`
 --
 
-INSERT INTO `leaderboard` (`id`, `name`, `percentage`) VALUES
-(7, 'hayati', 100);
+INSERT INTO `leaderboard` (`id`, `name`, `percentage`, `created_at`) VALUES
+(1, 'hello', 80, '2025-06-15 17:42:17'),
+(2, 'winnie', 40, '2025-06-15 17:44:16');
 
 --
 -- Indexes for dumped tables
@@ -58,7 +61,7 @@ ALTER TABLE `leaderboard`
 -- AUTO_INCREMENT for table `leaderboard`
 --
 ALTER TABLE `leaderboard`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
