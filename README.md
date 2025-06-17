@@ -31,6 +31,7 @@
 - For each iteration, a separate branch (`iteration-1`, `iteration-2`, `iteration-3`) was created to isolate development.
 - Features were developed and tested within their respective branches.
 - This strategy allowed organised, incremental development and easy tracking of progress.
+- Tags were then used to mark the releases of completed iterations (v1.0 , v2.0, v3.0) and v4.0 being the complete finalised merged version of the entire quiz, including database and audio files.
 
 ## Kanban Board for Task Management
 - We used ClickUp to manage our project tasks using a Kanban board. The board included columns for Backlog, To Do, In Progress, Testing, and Done. Each iteration was broken down into small, actionable tasks, and each task was tracked as a card on the board.
