@@ -36,4 +36,6 @@
 - We used ClickUp to manage our project tasks using a Kanban board. The board included columns for Backlog, To Do, In Progress, Testing, and Done. Each iteration was broken down into small, actionable tasks, and each task was tracked as a card on the board.
 - As we progressed, tasks were moved across columns to reflect their status. This helped us visualise our workflow, prioritise tasks, and identify any bottlenecks early. The Kanban board also made it easier to collaborate and ensure nothing was overlooked.
 
+https://sharing.clickup.com/90181320640/b/h/6-901808674517-2/9245c3d8833f2e5 - board view
+https://sharing.clickup.com/90181320640/l/h/6-901808674517-1/c5be1d274d6079e - list view
 
